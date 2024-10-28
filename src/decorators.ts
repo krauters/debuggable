@@ -1,3 +1,5 @@
+import type { Logger } from './structures'
+
 import { prefix } from './defaults'
 import { DurationTracker } from './duration-tracker'
 import { getPostRunLog, getPreRunLog } from './utils'
@@ -10,7 +12,7 @@ import { getPostRunLog, getPreRunLog } from './utils'
  * @param tracker The duration tracker to measure method execution time.
  * @returns A function that decorates the target class or object.
  */
-function logMethods(log: Console, className: string, tracker: DurationTracker) {
+function logMethods(log: Logger, className: string, tracker: DurationTracker) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	return function (target: any) {
 		if (typeof target !== 'object' && typeof target !== 'function') {
@@ -55,7 +57,7 @@ function logMethods(log: Console, className: string, tracker: DurationTracker) {
  * @param log The logger instance to be used for all logging.
  * @returns The decorated class with debug logging.
  */
-export function debuggable(log?: Console) {
+export function debuggable(log?: Logger) {
 	const tracker = new DurationTracker(log)
 	log ??= console
 

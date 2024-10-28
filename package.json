@@ -1,7 +1,7 @@
 {
 	"name": "@krauters/debuggable",
 	"description": "A TypeScript utility that automatically adds detailed debug logs before and after method calls in classes, simplifying the tracking of execution flow and troubleshooting.",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"main": "dist/src/index.js",
 	"type": "commonjs",
 	"scripts": {
@@ -25,11 +25,19 @@
 		"typescript"
 	],
 	"author": "Colten Krauter <coltenkrauter>",
+	"bugs": {
+		"url": "https://github.com/krauters/debuggable/issues/new?title=%5BBUG%5D+Brief+Description&template=bug_report.md"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/krauters/debuggable.git"
+	},
+	"homepage": "https://buymeacoffee.com/coltenkrauter",
 	"license": "ISC",
 	"devDependencies": {
 		"@jest/globals": "^29.7.0",
 		"@krauters/eslint-config": "^1.4.0",
-		"@types/jest": "^29.5.13",
+		"@types/jest": "^29.5.14",
 		"husky": "^9.1.6",
 		"jest": "^29.7.0",
 		"nodemon": "^3.1.7",
@@ -40,5 +48,8 @@
 	"files": [
 		"dist",
 		"scripts"
-	]
+	],
+	"dependencies": {
+		"@krauters/logger": "^0.1.0"
+	}
 }
