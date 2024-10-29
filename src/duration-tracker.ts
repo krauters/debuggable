@@ -1,3 +1,5 @@
+import type { Logger } from './structures'
+
 export const prefix = '[DurationTracker] '
 
 export class DurationTracker {
@@ -8,7 +10,7 @@ export class DurationTracker {
 	 *
 	 * @param log The logger to use for logging messages. (default: Console)
 	 */
-	constructor(log?: Console) {
+	constructor(log?: Logger) {
 		log ??= console
 		log.debug(`${prefix}Initializing [${this.constructor.name}]`)
 
