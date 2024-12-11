@@ -1,17 +1,15 @@
 import type { Logger as KrautersLogger } from '@krauters/logger'
 
-export interface Metadata {
-	className: string
-	functionName: string
-}
+export type Logger = Console | KrautersLogger
 
 export interface LogProps {
 	className: string
 	method: string
 }
 
-export interface PreLogProps extends LogProps {
-	args: string[]
+export interface Metadata {
+	className: string
+	functionName: string
 }
 
 export interface PostLogProps extends LogProps {
@@ -19,4 +17,6 @@ export interface PostLogProps extends LogProps {
 	suffix: string
 }
 
-export type Logger = Console | KrautersLogger
+export interface PreLogProps extends LogProps {
+	args: string[]
+}

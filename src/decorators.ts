@@ -1,8 +1,27 @@
 import type { Logger } from './structures'
 
-import { prefix } from './defaults'
 import { DurationTracker } from './duration-tracker'
 import { getPostRunLog, getPreRunLog } from './utils'
+
+/**
+ * A decorator that adds debug logging to all methods of a class, measuring method execution time.
+ *
+ * @param log The logger instance to be used for all logging.
+ * @returns The decorated class with debug logging.
+ */
+export function debuggable(log?: Logger) {
+	const tracker = new DurationTracker(log)
+	log ??= console
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return function (target: any, context?: any) {
+		const className = String(context?.name ?? target.name)
+
+		// Apply the decorator to both instance and static methods
+		logMethods(log, className, tracker)(target)
+		logMethods(log, className, tracker)(target.prototype)
+	}
+}
 
 /**
  * A helper function that decorates all instance or static methods of a class to add debug logs.
@@ -16,7 +35,7 @@ function logMethods(log: Logger, className: string, tracker: DurationTracker) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	return function (target: any) {
 		if (typeof target !== 'object' && typeof target !== 'function') {
-			log.debug(`${prefix}Target [${target}] is not an object or function, skipping decoration`)
+			log.debug(`Target [${target}] is not an object or function, skipping decoration`)
 
 			return
 		}
@@ -24,7 +43,7 @@ function logMethods(log: Logger, className: string, tracker: DurationTracker) {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const keys = Reflect.ownKeys(target)
 
-		log.debug(`${prefix}Decorating the following [${className}] methods with debuggable: [${keys.join(', ')}]`)
+		log.debug(`Decorating the following [${className}] methods with debuggable: [${keys.join(', ')}]`)
 		keys.forEach((key) => {
 			const method = String(key)
 			const descriptor = Object.getOwnPropertyDescriptor(target, key)
@@ -48,25 +67,5 @@ function logMethods(log: Logger, className: string, tracker: DurationTracker) {
 				Object.defineProperty(target, key, descriptor)
 			}
 		})
-	}
-}
-
-/**
- * A decorator that adds debug logging to all methods of a class, measuring method execution time.
- *
- * @param log The logger instance to be used for all logging.
- * @returns The decorated class with debug logging.
- */
-export function debuggable(log?: Logger) {
-	const tracker = new DurationTracker(log)
-	log ??= console
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return function (target: any, context?: any) {
-		const className = String(context?.name ?? target.name)
-
-		// Apply the decorator to both instance and static methods
-		logMethods(log, className, tracker)(target)
-		logMethods(log, className, tracker)(target.prototype)
 	}
 }
