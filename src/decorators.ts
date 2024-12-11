@@ -1,6 +1,5 @@
 import type { Logger } from './structures'
 
-import { prefix } from './defaults'
 import { DurationTracker } from './duration-tracker'
 import { getPostRunLog, getPreRunLog } from './utils'
 
@@ -36,7 +35,7 @@ function logMethods(log: Logger, className: string, tracker: DurationTracker) {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	return function (target: any) {
 		if (typeof target !== 'object' && typeof target !== 'function') {
-			log.debug(`${prefix}Target [${target}] is not an object or function, skipping decoration`)
+			log.debug(`Target [${target}] is not an object or function, skipping decoration`)
 
 			return
 		}
@@ -44,7 +43,7 @@ function logMethods(log: Logger, className: string, tracker: DurationTracker) {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const keys = Reflect.ownKeys(target)
 
-		log.debug(`${prefix}Decorating the following [${className}] methods with debuggable: [${keys.join(', ')}]`)
+		log.debug(`Decorating the following [${className}] methods with debuggable: [${keys.join(', ')}]`)
 		keys.forEach((key) => {
 			const method = String(key)
 			const descriptor = Object.getOwnPropertyDescriptor(target, key)

@@ -50,6 +50,6 @@
 		"scripts"
 	],
 	"dependencies": {
-		"@krauters/logger": "^1.4.1"
+		"@krauters/logger": "^1.4.3"
 	}
 }

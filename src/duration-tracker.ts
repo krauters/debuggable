@@ -1,7 +1,5 @@
 import type { Logger } from './structures'
 
-export const prefix = '[DurationTracker] '
-
 export class DurationTracker {
 	private startTimes: Record<string, number>
 
@@ -12,7 +10,7 @@ export class DurationTracker {
 	 */
 	constructor(log?: Logger) {
 		log ??= console
-		log.debug(`${prefix}Initializing [${this.constructor.name}]`)
+		log.debug(`Initializing [${this.constructor.name}]`)
 
 		this.startTimes = {}
 	}

@@ -1,7 +1,5 @@
 import type { PostLogProps, PreLogProps } from './index'
 
-import { prefix } from './defaults'
-
 /**
  * Constructs the log message to display after method execution.
  *
@@ -9,7 +7,7 @@ import { prefix } from './defaults'
  * @returns The formatted post-run log message.
  */
 export function getPostRunLog({ className, method, result, suffix }: PostLogProps) {
-	return `${prefix}Called [${className}.${method}] which returned [${JSON.stringify(result)}]${suffix}`
+	return `Called [${className}.${method}] which returned [${JSON.stringify(result)}]${suffix}`
 }
 
 /**
@@ -19,5 +17,5 @@ export function getPostRunLog({ className, method, result, suffix }: PostLogProp
  * @returns The formatted pre-run log message.
  */
 export function getPreRunLog({ args, className, method }: PreLogProps) {
-	return `${prefix}Calling [${className}.${method}] with args [${args.map((a) => JSON.stringify(a)).join(', ')}]`
+	return `Calling [${className}.${method}] with args [${args.map((a) => JSON.stringify(a)).join(', ')}]`
 }
