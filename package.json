@@ -1,7 +1,7 @@
 {
 	"name": "@krauters/debuggable",
 	"description": "A TypeScript utility that automatically adds detailed debug logs before and after method calls in classes, simplifying the tracking of execution flow and troubleshooting.",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"main": "dist/src/index.js",
 	"type": "commonjs",
 	"scripts": {
